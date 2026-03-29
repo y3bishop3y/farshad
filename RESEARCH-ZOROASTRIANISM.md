@@ -209,13 +209,104 @@ This satisfies all three prohibitions — fire, water, and earth remain unpollut
 
 ### Dietary Rules
 
-Zoroastrianism does not prohibit meat (unlike Jainism and some Hindu traditions), but dietary purity matters. Food prepared by non-Zoroastrians could be considered polluting. Sharing food across religious boundaries was a significant social marker.
+Zoroastrianism does not prohibit meat (unlike Jainism and some Hindu traditions). Parsi cuisine is actually heavily meat-focused — fish, eggs, and meat are staples. However, the Avesta draws sharp distinctions about *which* animals may be harmed and *how.*
+
+Food prepared by non-Zoroastrians could be considered polluting. Sharing food across religious boundaries was a significant social marker.
+
+### Animals — The Two Categories
+
+The Avesta divides all animal life into two classes:
+
+**Beneficent animals (*gao.spenta*)** — cattle, dogs, horses, domestic animals. Creations of Ahura Mazda. To be protected, cared for, never wantonly harmed. The flesh of cattle (cows, oxen, bulls, wild cattle) is **not permissible for consumption** according to Avestan sages. Deer, bison, buffalo, yak, antelope, and gazelle are similarly prohibited.
+
+**Noxious creatures (*khrafstra*)** — snakes, rats, scorpions, flies, ants, frogs, lizards, cockroaches. Creations of Angra Mainyu. Killing them is not just allowed — it is a **sacred duty** (Yasht 21.1, Vendidad 16.12). There was an annual **Feast of Pest Killing** (*Jašn-e khrafstra koshuun*) celebrated by Zoroastrians of Kerman at the beginning of summer. Killing khrafstra was meritorious and could atone for sins.
+
+### Yasna 29 — The Soul of the Cow (Geush Urvan)
+
+One of the oldest and most sacred hymns in the Gathas — attributed directly to Zarathustra — is **Yasna 29: "The Cow's Lament."** In it, Geush Urvan, the Soul of the Cow (representing *all* animal life), cries out to Ahura Mazda:
+
+*"Wrath, fury, violence... beaten with fury, and plagued with cruelty... slaughter without measure and stealing, has made my life in all things full of sorrow."*
+
+The cow asks: *"For whom have I been crafted? Who will protect me?"*
+
+God answers: Zarathustra will protect you.
+
+**For the novel:** Frashad grew up hearing this hymn. The Soul of the Cow crying out to God for protection from slaughter. And now Frashad kills whales — the largest creatures on earth — for a living. Every kill is a violation of Geush Urvan's plea.
+
+### The Kar-Fish — Cosmic Guardian of the Sea
+
+In the Bundahishn (the Zoroastrian creation text), there is a cosmic guardian creature called the **Kar-Fish** — the greatest of all water creatures, chief of everything that lives in the sea. Ahura Mazda created ten Kar-Fish to circle the Tree of Life (Gaokerena/Haoma), protecting it from the forces of evil.
+
+One of them — the **Vas of Panchasadvaran** — is so enormous that its length is described as *"what a man, while in a swift race, will walk from dawn till when the sun goes down."* A creature the size of a day's journey. These fish have *"the keenest eyesight of all living beings"* and are "so serpent-like" that *"they know the scratch of a needle's point by which the water shall increase, or by which it is diminishing."*
+
+The Kar-Fish will guard the Tree of Life until Frashokereti — the final renovation of the universe.
+
+**For the novel:** A whale-sized guardian of cosmic order, created by Ahura Mazda, with the keenest sight of all living things. And Frashad hunts whales. Every sperm whale he kills could be, in the deepest layer of his theology, a relative of the Kar-Fish — a guardian creature of the good creation. The healer's son who became a killer of the largest animal on earth. The man raised on Yasna 29 — the animal's cry to God for protection — who now answers that cry with a harpoon.
 
 ### Other Taboos
 
 - **Cutting hair and nails** requires care — the clippings are considered dead matter (nasu) and must be disposed of properly
 - **Menstruation** renders a woman ritually impure in traditional practice
 - **Contact with non-Zoroastrians** could be polluting in strict interpretation
+
+---
+
+## Medicine and Healing — The Three Physicians
+
+Zoroastrianism has a **deep, foundational relationship with medicine** — not despite its purity laws, but alongside them. The Vendidad (Fargard 7, verses 36–44) contains an entire section on physicians, their probation, and their fees. Medicine is not forbidden. It is regulated, categorized, and sacred.
+
+### The Three Types of Physician (Vendidad 7.44)
+
+The Avesta explicitly names three kinds of healer:
+
+1. **One who heals with the knife** — surgery (*karetô-baêshaza*)
+2. **One who heals with herbs/plants** — herbal medicine (*urvarô-baêshaza*)
+3. **One who heals with the Holy Word (manthra)** — spiritual/incantatory healing (*mãthrô-baêshaza*)
+
+The text states: *"If several healers offer themselves together... let one apply to the healing by the Holy Word: for this one is the best-healing of all healers who heals with the Holy Word; he will best drive away sickness from the body of the faithful."*
+
+The manthra-healer is ranked highest. But the knife-healer — the surgeon — is not condemned. He is **regulated and tested.**
+
+### The Five Healers (Yasht 3.6)
+
+A broader classification lists five types:
+
+1. One who heals with **goodness and care** (righteous living)
+2. One who heals with **justice**
+3. One who heals with **surgery**
+4. One who heals with **plants**
+5. One who heals with the **manthra** (holy word)
+
+### Probation of Physicians (Vendidad 7.36–40)
+
+The Vendidad prescribes a probationary system for surgeons:
+
+- A physician must first practice on **non-Zoroastrians** (worshippers of the Daevas)
+- If his first three patients die under the knife, he is **forbidden to practice forever**
+- If his first three patients survive, he is **qualified forever** and "may henceforth at his will attend worshippers of Mazda; he may at his will treat with the knife worshippers of Mazda, and heal them with the knife"
+- If an unqualified physician operates on a Zoroastrian and the patient dies, it is treated as **willful murder**
+
+This is a remarkably modern concept — licensure through demonstrated competence, malpractice as criminal liability.
+
+### The Legendary Surgeon: Thrita
+
+The Vendidad (20.2) credits **Thrita** as the first holistic physician, who developed a surgical knife with gold-bound top and bottom. Surgery is not foreign to Zoroastrian tradition — it is *foundational.*
+
+### The Academy of Jundishapur
+
+The **Academy of Gundishapur** (3rd–7th century CE, Sassanid era) was the world's first teaching hospital and academic medical center, assembling Greek, Indian, Syriac, Persian, Jewish, and Zoroastrian medical traditions. The Persians pioneered the **bimaristan** ("place for the sick") — the template for the modern hospital. Medical record-keeping, physician licensure, and systematic training originated here. The Islamic world's hospital system was built directly on this Zoroastrian-Persian model.
+
+### Parsis and Medicine in Bombay
+
+By the 19th century, Parsis in Bombay became prominent in medicine, founding hospitals and training as physicians. This was not a departure from tradition — it was a continuation of a medical heritage stretching back through Jundishapur to the Avesta itself.
+
+### The Nasu Tension — Relevant to Frashad
+
+Here is the theological tension: Zoroastrian purity law considers dead flesh (**nasu**) the greatest source of pollution. A corpse is inhabited by the demon Druj Nasu the moment life departs. Touching dead matter requires elaborate purification. Corpse-bearers (nasasalars) exist in a state of permanent ritual marginality.
+
+Yet the Vendidad explicitly authorizes physicians to **"treat with the knife"** — to cut living flesh, to handle blood, to amputate. The distinction is between the *living body* (Ahura Mazda's creation, to be healed) and the *dead body* (Angra Mainyu's domain, to be avoided). Healing a living person is not pollution — it is **restoration of Asha**. The knife that heals serves truth.
+
+For Frashad, this is critical: if he amputates Ahab's crushed leg, he is not violating his faith. He is acting as a knife-healer — the oldest medical tradition in his religion. The surgical act is sanctioned by the Vendidad itself. But the theological question remains: *should he have saved a man the universe was trying to collect?* The knife was clean. The decision to use it may not have been.
 
 ---
 

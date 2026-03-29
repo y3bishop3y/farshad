@@ -192,6 +192,117 @@ This absence is itself significant. The three regular harpooneers have a kind of
 
 ---
 
+## Job 1:19 — The Four Corners and the Four Harpooneers
+
+### The Epigraph
+
+Melville chose Job 1:19 as the epigraph for *Moby-Dick*:
+
+> **"And I only am escaped alone to tell thee."**
+
+This is spoken by a servant — the sole survivor of a catastrophe — who runs to tell Job what happened. What happened is this:
+
+> "And, behold, there came a great wind from the wilderness, and smote the **four corners** of the house, and it fell upon the young men, and they are dead; and I only am escaped alone to tell thee."
+
+A wind from the wilderness strikes the **four corners** of the house. The house collapses. Everyone inside dies. One person escapes to tell the story.
+
+### The Parallel
+
+| Job 1:19 | Moby-Dick |
+|----------|-----------|
+| A great wind from the wilderness | Moby Dick — the white force from the deep |
+| Smote the **four corners** of the house | The Pequod carries **four harpooneers from four corners of the earth** |
+| The house fell upon the young men | The ship sinks — everyone goes down |
+| "They are dead" | All die except Ishmael |
+| "I only am escaped alone to tell thee" | Ishmael survives, floating on Queequeg's coffin, to write the novel |
+
+The Pequod **is** Job's house. The four harpooneers **are** the four corners. Queequeg (Pacific), Tashtego (Americas), Daggoo (Africa), Fedallah (Asia) — four men from the four edges of the world, holding the structure together. When the whale strikes, the house collapses. The four corners fall. One servant escapes.
+
+Melville told the reader this on the title page. Before Chapter 1. Before Ishmael says "Call me." The first thing the reader sees is a survivor of a four-cornered collapse saying: I alone survived to tell you.
+
+### Job vs. Ahab — The Test
+
+Job is tested by God. Satan says to God: Job only worships you because you gave him everything. Take it away and he'll curse you. God agrees. Job loses his livestock, his servants, his children, his health. He is covered in boils, sitting in ashes, scraping his skin with a broken pot.
+
+**Job's wife says: "Curse God and die."**
+
+**Job refuses.** "Shall we receive good from God, and shall we not receive evil?" He does not curse God. He questions. He laments. He demands an answer. But he does not curse.
+
+**Ahab curses.** That is the entire difference. Ahab receives the same test — the whale takes his leg the way the wind takes Job's children — and instead of refusing to curse God, Ahab builds his entire existence around cursing God. "I'd strike the sun if it insulted me." He baptizes his harpoon "in nomine diaboli" — in the name of the devil. He stands on Fedallah and shouts at the fire. He is Job's wife's advice made flesh: *curse God and die.*
+
+Job endures. Ahab attacks. Job is restored (God gives him new children, new wealth). Ahab is destroyed.
+
+And the sun — **the sun that Ahab would strike** — is the sacred object in Zoroastrianism. Frashad's religion. The fire Frashad's father tended is the earthly representation of the sun's divine light. When Ahab says "I'd strike the sun if it insulted me," Frashad hears a man threatening to strike the holiest thing in his cosmos. Ahab is not just cursing God. He is cursing Frashad's God, specifically, by name, without knowing it.
+
+### Frashad as the Opposite of Job's Response
+
+Job was tested and did not curse. He accepted suffering as part of the order — "the Lord gave, and the Lord hath taken away; blessed be the name of the Lord."
+
+Frashad accepts too. Not with Job's words — he has no audience to perform faith for — but with the same posture. Ein breira. What choice do we have? The order is the order. Asha is Asha. You do not strike the sun. You do not curse the fire. You tend it, even when it burns you.
+
+Ahab is Job-who-cursed. Frashad is Job-who-didn't. Two responses to the same cosmic test, standing on the same deck, heading for the same whale.
+
+---
+
+## The Ship of the Dead — The Pequod and the Dying Religion
+
+### What "Pequod" Means
+
+The ship is named after the **Pequot** — an Algonquian-speaking Native American tribe from Connecticut. Melville knew exactly what he was doing.
+
+**The Pequot War (1636–1638):** English colonists, allied with the Mohegan and Narragansett, attacked the Pequot people. On May 26, 1637, Captain John Mason's forces attacked the fortified Pequot village at Mystic. They set the wooden palisade on fire, blocked the exits, and shot anyone who tried to escape. Between **400 and 700 Pequot were killed** — men, women, children. Survivors were enslaved, sold to Bermuda and the West Indies, or dispersed among other tribes.
+
+**The Treaty of Hartford (1638):** After the massacre, the English didn't just defeat the Pequot. They tried to **erase them.** The treaty prohibited the surviving Pequot from:
+- Returning to their lands
+- Speaking their tribal language
+- **Calling themselves Pequot**
+
+The name itself was outlawed. The colonists tried to kill the people and then kill the word. (The Pequot survived despite this — two branches exist today — but Melville, writing in 1851, called them "now extinct as the ancient Medes.")
+
+**Melville named his doomed ship after a people who were massacred and then erased.** The Pequod carries its own doom in its name. Every time a character says the ship's name, they are invoking a genocide.
+
+### Fedallah on a Ship Named for a Dead People
+
+Now put Fedallah on that ship.
+
+He is a Zoroastrian. One of the last of a dying religion. The numbers:
+
+- After the Arab conquest of Iran (642 CE), Zoroastrians were converted, persecuted, massacred, and driven into exile
+- By the 1850s (the era of *Moby-Dick*), fewer than **7,000 Zoroastrians remained in Iran**
+- The Parsi community in India peaked at **114,000 in 1941** and has declined to roughly **57,000 by 2011**
+- Today, the global Zoroastrian population is estimated at **100,000–120,000** — one of the smallest religious communities on Earth
+- The Indian government launched the "Jiyo Parsi" ("Live Parsi") scheme in 2013 to try to prevent the community's extinction
+
+Zoroastrianism is not extinct. But it has been dying for over a thousand years. It was one of the great religions of the ancient world — the state religion of three successive Persian empires, a faith that influenced Judaism, Christianity, and Islam. And it was broken by conquest, reduced to a handful of refugees in western India, and has been shrinking ever since.
+
+**Frashad is a member of a dying faith, standing on a ship named for a dead people, sailing toward the destruction of everyone on board.**
+
+The Pequot were massacred and then their name was outlawed. The Zoroastrians were conquered and then slowly disappeared. Both peoples were real. Both were erased — or nearly. And Melville put a representative of one on a ship named after the other.
+
+### The Layers
+
+| The Pequot | The Zoroastrians | The Pequod |
+|-----------|-----------------|-----------|
+| Massacred by colonists (1637) | Conquered by Arabs (642 CE) | Destroyed by the whale |
+| Name outlawed by treaty | Religion slowly dying | Ship's name = memorial to the dead |
+| Survivors dispersed, forced to take other names | Survivors fled to India, took new cultural forms | Crew scattered — only Ishmael survives |
+| English tried to erase them | Islam absorbed/marginalized them | The ocean erases the ship entirely |
+| Two branches survive today | ~100,000 remain worldwide | One man (Ishmael) survives to tell the story |
+
+**Ishmael is the Pequod's Ishmael — the one who survives to tell the story, the way the Pequot's descendants survived despite the erasure.** But Fedallah is different. He doesn't survive. He goes first. He is the first to die on a ship named for a people who were nearly destroyed, and he belongs to a religion that is slowly following the same path.
+
+### What Frashad Would Know
+
+Would Frashad know what "Pequod" means? Almost certainly not. He wouldn't know about the Pequot, about Connecticut, about the massacre at Mystic. The name would be just a name to him — an English word, like so many others he's absorbed.
+
+But the reader would know. And the novel would know. The resonance is there whether Frashad is aware of it or not: a man from a dying faith on a ship named for a dead tribe, sailing into an ending that was determined before anyone boarded.
+
+And Tashtego — the Wampanoag harpooneer from Martha's Vineyard — **he** might know. The Wampanoag had their own relationship to English colonial violence. The Wampanoag fought King Philip's War (1675–1676), one generation after the Pequot War. They know what it means to be a people the colonists tried to destroy. If Tashtego ever thinks about the name of the ship he's on — and Melville never tells us whether he does — he's standing on a grave.
+
+Two indigenous men and a Zoroastrian, all on a ship named for a genocide, all serving under white New England officers. The ship is a coffin before it leaves port. It was always a coffin. Its name says so.
+
+---
+
 ## Sources
 
 - Melville, Herman. *Moby-Dick; or, The Whale* (1851). Chapters 26, 27, 36, 40, 47, 48, 50, 72, 78, 110, 133, 134, 135, Epilogue.
@@ -202,3 +313,8 @@ This absence is itself significant. The three regular harpooneers have a kind of
 - [Moby-Dick; Understanding Ahab: The Harpooneers](https://mobydickunderstandingahab.org/chapter/harpooneers/)
 - [Wikipedia: Four Horsemen of the Apocalypse](https://en.wikipedia.org/wiki/Four_horsemen_of_the_apocalypse)
 - Revelation 6:1–8 (ESV)
+- [Wikipedia: Pequod (Moby-Dick)](https://en.wikipedia.org/wiki/Pequod_(Moby-Dick))
+- [Wikipedia: Pequot War](https://en.wikipedia.org/wiki/Pequot_War)
+- [Wikipedia: Treaty of Hartford (1638)](https://en.wikipedia.org/wiki/Treaty_of_Hartford_(1638))
+- [Wikipedia: Mystic massacre](https://en.wikipedia.org/wiki/Mystic_massacre)
+- [Wikipedia: Zoroastrian population decline](https://en.wikipedia.org/wiki/Zoroastrian_population_decline)

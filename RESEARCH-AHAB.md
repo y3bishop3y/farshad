@@ -41,6 +41,26 @@ From Chapter 28 ("Ahab"):
 
 - **The leg:** An ivory prosthesis replacing the leg Moby Dick "reaped away... as a mower a blade of grass." Ahab bores a hole in the quarterdeck to brace it while standing. Shortly before the Pequod sailed, he fell and the ivory leg "stake-wise smitten, and all but pierced his groin" — an injury with unmistakable castration symbolism.
 
+### The Injury — What Actually Happened (Medical & Anatomical Reality)
+
+Melville's language — "sweeping his sickle-shaped lower jaw beneath him, Moby Dick had reaped away Ahab's leg, as a mower a blade of grass" — is literature, not anatomy.
+
+**A sperm whale cannot cleanly sever a leg.** The sperm whale's lower jaw is 16 feet long, narrow, V-shaped, with 18–26 conical peg-like teeth designed for gripping squid by suction and interlocking grip. These teeth are built for *holding*, not *cutting.* A sperm whale is not a shark. It doesn't bite things in half.
+
+**What likely happened:** The whale stoved (smashed) the whaleboat — the single most common whaling accident. A whale's head or tail hits a 25-foot wooden boat and it shatters. Ahab's leg was probably **crushed** — trapped between wreckage and whale, shattered by flying timber, mangled in the collision. Not cleanly reaped. Destroyed.
+
+**Amputation at sea:** The destroyed leg would then require amputation aboard the ship. American whaling ships were **not legally required to carry surgeons** (British ships were, since 1733). Many went without any doctor at all. A whaler's medicine chest contained a tourniquet, pliers, basic surgical tools, and numbered tinctures. No anesthesia.
+
+If a surgeon was aboard, he could complete the amputation in under two minutes. Speed was survival — the longer the procedure, the greater the chance of death from shock and blood loss. If no surgeon was aboard, the mate, captain, or whoever had the steadiest hands performed the operation. There is a documented case of Captain Coffin holding a pistol to his mate's head and forcing him to amputate with a knife. Both men fainted afterward.
+
+**For the novel (if Frashad was there):** If Frashad was Ahab's harpooner on the leg voyage, several possibilities emerge:
+- Frashad pulled Ahab from the water after the boat was stoved
+- Frashad applied the tourniquet that stopped the bleeding
+- If no surgeon was aboard, Frashad may have performed or assisted the amputation — a man "extraordinary with a long blade" who has been at sea for 20+ years and has killed men
+- Frashad's act of saving Ahab's life — or cutting off the ruined leg to save him — becomes the act that creates the cosmic debt. He preserved a man the universe was trying to collect
+
+The ivory leg Ahab walks on afterward — whale bone, nasu, corpse matter — is built from the same species that destroyed the original leg. And if Frashad was the one who cut, then the man who made Ahab what he is spends the rest of the novel completing what the whale started.
+
 - **Overall:** Grey-haired, tawny, scarred, one-legged, described as looking like he'd been "in a fire" — burned but not consumed. Melville calls him "a grand, ungodly, god-like man."
 
 ---

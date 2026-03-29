@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRASHAD — Timeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #13131a;
+    --bg-card-hover: #1a1a24;
+    --frashad: #c4813a;
+    --frashad-dim: #6b4520;
+    --ahab: #4a7a9b;
+    --ahab-dim: #2a4a5b;
+    --historical: #8b6b8a;
+    --historical-dim: #4a3a4a;
+    --branch: #b5945b;
+    --branch-bg: #1a1510;
+    --text: #d4cfc8;
+    --text-dim: #7a756e;
+    --text-bright: #eae5de;
+    --accent: #c4813a;
+    --fire: #d4633a;
+    --water: #3a6b8b;
+    --line-frashad: #c4813a;
+    --line-ahab: #4a7a9b;
+    --line-history: #8b6b8a;
+    --popup-bg: #1a1a24;
+    --popup-border: #3a3a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .header {
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .header .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .legend-dot.frashad { background: var(--frashad); }
+  .legend-dot.ahab { background: var(--ahab); }
+  .legend-dot.historical { background: var(--historical); }
+  .legend-dot.branch { background: var(--branch); border: 2px dashed var(--branch); background: transparent; }
+
+  .timeline-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+    position: relative;
+  }
+
+  .era {
+    margin-bottom: 60px;
+  }
+
+  .era-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    text-align: center;
+    padding: 16px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #2a2a34;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 40px 1fr;
+    gap: 0;
+    min-height: 60px;
+    position: relative;
+    align-items: start;
+  }
+
+  .timeline-row.branch-row {
+    min-height: auto;
+  }
+
+  .year-col {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-align: right;
+    padding: 12px 16px 12px 0;
+    position: sticky;
+    top: 0;
+  }
+
+  .year-col.highlight {
+    color: var(--text-bright);
+    font-size: 1.4rem;
+  }
+
+  .frashad-col, .ahab-col {
+    padding: 8px 16px;
+    position: relative;
+  }
+
+  .center-line {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .center-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% - 8px);
+    width: 3px;
+    background: var(--line-frashad);
+  }
+
+  .center-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% + 5px);
+    width: 3px;
+    background: var(--line-ahab);
+  }
+
+  .event-card {
+    background: var(--bg-card);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 4px 0;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .event-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+  }
+
+  .event-card.frashad { border-left-color: var(--frashad); }
+  .event-card.ahab { border-left-color: var(--ahab); }
+  .event-card.historical { border-left-color: var(--historical); }
+  .event-card.fire { border-left-color: var(--fire); }
+
+  .event-card .age {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .event-card .event-text {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .event-card .event-text strong {
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+
+  .event-card .event-text em {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .historical-bar {
+    grid-column: 1 / -1;
+    background: #18151f;
+    border: 1px solid var(--historical-dim);
+    border-radius: 6px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .historical-bar:hover {
+    background: #201c28;
+    border-color: var(--historical);
+  }
+
+  .historical-bar .hist-marker {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--historical);
+    flex-shrink: 0;
+  }
+
+  .historical-bar .hist-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--historical);
+    flex-shrink: 0;
+    min-width: 50px;
+  }
+
+  .historical-bar .hist-text {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .historical-bar .hist-text strong {
+    color: var(--text);
+  }
+
+  .historical-bar .link-icon {
+    margin-left: auto;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .branch-block {
+    grid-column: 1 / -1;
+    background: var(--branch-bg);
+    border: 2px dashed var(--branch);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+
+  .branch-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--branch);
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
+
+  .branch-paths {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .branch-path {
+    background: rgba(181, 148, 91, 0.06);
+    border: 1px solid rgba(181, 148, 91, 0.2);
+    border-radius: 6px;
+    padding: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .branch-path:hover {
+    background: rgba(181, 148, 91, 0.1);
+    border-color: var(--branch);
+  }
+
+  .branch-path h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--branch);
+    margin-bottom: 8px;
+  }
+
+  .branch-path p {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .convergence-marker {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .convergence-marker .marker-line {
+    width: 60%;
+    height: 1px;
+    margin: 0 auto 12px;
+    background: linear-gradient(to right, var(--frashad), var(--ahab));
+  }
+
+  .convergence-marker .marker-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .death-row {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px 20px;
+    margin: 10px 0;
+    background: linear-gradient(135deg, rgba(196, 129, 58, 0.05), rgba(74, 122, 155, 0.05));
+    border-radius: 8px;
+    border: 1px solid #2a2a34;
+  }
+
+  .death-row .death-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .death-row .death-text strong {
+    color: var(--text-bright);
+  }
+
+  .death-row .avestan {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fire);
+    margin: 16px 0 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .popup-overlay.active { display: flex; }
+
+  .popup {
+    background: var(--popup-bg);
+    border: 1px solid var(--popup-border);
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 32px;
+    position: relative;
+  }
+
+  .popup h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .popup .popup-year {
+    font-size: 0.9rem;
+    color: var(--historical);
+    margin-bottom: 16px;
+  }
+
+  .popup p {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .popup .relevance {
+    background: rgba(196, 129, 58, 0.08);
+    border-left: 3px solid var(--frashad);
+    padding: 12px 16px;
+    margin-top: 16px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .popup .relevance p {
+    color: var(--frashad);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .popup .wiki-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--ahab);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--ahab-dim);
+  }
+
+  .popup .wiki-link:hover { border-bottom-color: var(--ahab); }
+
+  .popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: 1px solid var(--popup-border);
+    color: var(--text-dim);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .popup-close:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-bright);
+  }
+
+  .footer-quote {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .footer-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-row {
+      grid-template-columns: 70px 1fr;
+      gap: 0;
+    }
+    .center-line { display: none; }
+    .ahab-col { grid-column: 2; }
+    .header h1 { font-size: 2.5rem; }
+    .branch-paths { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>FRASHAD</h1>
+  <div class="subtitle">A Timeline of Two Lives and the World Between Them</div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot frashad"></div> Frashad</div>
+    <div class="legend-item"><div class="legend-dot ahab"></div> Ahab</div>
+    <div class="legend-item"><div class="legend-dot historical"></div> Historical Event</div>
+    <div class="legend-item"><div class="legend-dot branch"></div> Branch Point</div>
+  </div>
+</div>
+
+<div class="timeline-container">
+
+  <!-- PRE-HISTORY -->
+  <div class="era">
+    <div class="era-title">Before Them</div>
+
+    <div class="historical-bar" onclick="showPopup('zoroaster')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">~1500 BCE</div>
+      <div class="hist-text"><strong>Zarathustra receives revelation</strong> — founding of Zoroastrianism, 3,000+ years before Frashad's birth</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('arab-conquest')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">642 CE</div>
+      <div class="hist-text"><strong>Arab conquest of Sassanid Persia</strong> — Zoroastrian diaspora begins: conversion, persecution, flight</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('parsi-migration')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">~716 CE</div>
+      <div class="hist-text"><strong>Parsi refugees arrive in Gujarat</strong> — "Sugar in the Milk." Frashad's ancestors reach India</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('behafarid')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">~748 CE</div>
+      <div class="hist-text"><strong>Behāfarīd executed</strong> — Zoroastrian priests hand their own prophet to Muslim authorities. The precedent for Frashad</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('bombay-portugal')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1534</div>
+      <div class="hist-text"><strong>Portugal takes Bombay</strong> — Sultan Bahadur Shah cedes seven islands under Treaty of Bassein. Minor outpost for 127 years</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('pequot')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1637</div>
+      <div class="hist-text"><strong>Pequot War — Mystic massacre</strong> — 400–700 killed. Treaty outlaws the Pequot name. The ship is named for this</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('bombay-british')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1661</div>
+      <div class="hist-text"><strong>Bombay becomes a wedding gift</strong> — Catherine of Braganza's dowry to Charles II. 1668: leased to EIC for £10/year</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('sperm-whale')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1712</div>
+      <div class="hist-text"><strong>First sperm whale killed from Nantucket</strong> — deep-ocean whaling begins</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('tourniquet')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1718</div>
+      <div class="hist-text"><strong>Screw-compressor tourniquet invented</strong> — "the most important surgical advancement before anesthesia." The tool that saves Ahab's life</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('british-surgeon-law')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1733</div>
+      <div class="hist-text"><strong>Britain requires surgeons on whaling ships</strong> — American whalers are exempt; many sail without any doctor</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('wadia-shipbuilders')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1736</div>
+      <div class="hist-text"><strong>Wadia family (Parsi) begins building ships for the EIC</strong> — Parsis will build over 100 British warships</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('maratha-wars')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1775–82</div>
+      <div class="hist-text"><strong>First Anglo-Maratha War</strong> — British acquire Salsette island adjacent to Bombay. Frashad born the year after the treaty</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('anglo-mysore')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1780–84</div>
+      <div class="hist-text"><strong>Second Anglo-Mysore War</strong> — Hyder Ali and Tipu Sultan fight the British. Britain at war on two continents (India + American Revolution)</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+  </div>
+
+  <!-- BIRTH -->
+  <div class="era">
+    <div class="era-title">The Lives Begin — 1782–1800</div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1782</div>
+      <div class="frashad-col"></div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 0</div>
+          <div class="event-text"><strong>Ahab born</strong> — Nantucket. His "crazy, widowed mother" names him after the wicked king of Israel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1783</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 0</div>
+          <div class="event-text"><strong>Frashad born</strong> — Bombay. Population: ~100,000. Parsis: 9.2%. Seven islands, three fort gates. Son of an Athornan healer — a man who tends the sacred fire <em>and</em> tends the sick. Hindu temples, Muslim mosques, Parsi fire temples, Portuguese churches — all within walking distance</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 1</div>
+          <div class="event-text">Ahab's mother dies. He is twelve months old. Orphaned</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('panchayat')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1787</div>
+      <div class="hist-text"><strong>British empower the Bombay Parsee Panchayat</strong> — the institution that governs Frashad's community. It will later expel him. He is 4 years old</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('french-rev')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1789</div>
+      <div class="hist-text"><strong>French Revolution</strong>. First whaling ship rounds Cape Horn into the Pacific</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('gujarat-famine')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1790</div>
+      <div class="hist-text"><strong>Gujarat famine</strong> — Parsi refugees flood into Bombay from ancestral homeland. Parsi population will <strong>quadruple</strong> by 1812. Frashad is 7</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">1790s</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Childhood</div>
+          <div class="event-text">Learning from his father: prayer <em>and</em> healing. Gujarati at home, Marathi in the streets, English on the docks, Arabic in the harbor. The adhan five times a day — Islam is ambient, not studied. His father treats Hindu patients, Muslim sailors, anyone who comes. <strong>Healing is restoring Asha</strong></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Childhood</div>
+          <div class="event-text">Growing up on Nantucket, fatherless, among Quakers and whalers. The island launches its fleet into the Pacific</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('napoleonic-surgery')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1793–1815</div>
+      <div class="hist-text"><strong>Napoleonic Wars</strong> — Larrey revolutionizes surgery: amputation in under 2 minutes, triage, flying ambulance. Trained surgeons cycle through Bombay</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('barbary-tribute')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1795</div>
+      <div class="hist-text"><strong>U.S. pays tribute to Barbary pirates</strong> — Algiers, Tunis, Tripoli. <strong>Jonathan Duncan</strong> becomes Governor of Bombay (serves until 1811)</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('bene-israel')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1796</div>
+      <div class="hist-text"><strong>Bene Israel Jews build "The Gate of Mercy"</strong> — Bombay's first synagogue. Another ancient, exiled people building a house of worship in Frashad's city. He is 13</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1799</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 16</div>
+          <div class="event-text"><strong>Meets the boy</strong> at Bombay harbor. <strong>Tipu Sultan killed at Srirangapatna</strong> — British supremacy in south India. Bombay is a military staging ground as much as a trading port</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 17</div>
+          <div class="event-text">Preparing to go to sea. Napoleon seizes power in France</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE BREAK -->
+  <div class="era">
+    <div class="era-title">The Same Year — 1800–1801</div>
+
+    <div class="convergence-marker">
+      <div class="marker-line"></div>
+      <div class="marker-text">Both leave home the same year. One toward the sea, one toward exile.</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1800–01</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 18</div>
+          <div class="event-text"><strong>Discovered. Expelled.</strong> The Panchayat — empowered by the British in 1787, when he was 4 — destroys his life. Runs before dawn. Does not say goodbye to his father. Being cast out is like losing citizenship. <em>"The Tarshish moment"</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 18</div>
+          <div class="event-text"><strong>First goes to sea</strong> as a boy-harpooner. "Forty years" at sea begin. The boy from the Quaker island enters the world of whales and violence</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('barbary-war-1')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1801</div>
+      <div class="hist-text"><strong>First Barbary War begins</strong> — U.S. vs. Tripoli. American ships attacked in the Mediterranean</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('treaty-bassein')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1802–05</div>
+      <div class="hist-text"><strong>Treaty of Bassein / Second Anglo-Maratha War</strong> — British gain first mainland territory around Bombay. The world Frashad left is expanding without him</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+  </div>
+
+  <!-- DIVERGENCE -->
+  <div class="era">
+    <div class="era-title">The Divergence — 1801–1815</div>
+
+    <div class="timeline-row">
+      <div class="year-col">1803–04</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 20–21</div>
+          <div class="event-text">Dhows down the Malabar Coast. <strong>Zanzibar, 1804</strong> — takes the name <strong>Fedallah</strong> for the first time. "Sacrifice of God." The mask begins</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 21–22</div>
+          <div class="event-text">Atlantic whaling. Building a reputation. Learning the trade that will consume him</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('uss-philadelphia')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1803</div>
+      <div class="hist-text"><strong>USS Philadelphia captured by Barbary pirates</strong> — crew enslaved. Decatur's raid to burn it (Feb 1804): "most bold and daring act of the Age"</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1809</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 26</div>
+          <div class="event-text"><strong>Muscat.</strong> Dhow routes: Zanzibar to Muscat to Mozambique. He has outrun everything he feared and arrived at a place past fear. Extraordinary with a long blade</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 27</div>
+          <div class="event-text">At sea. Veteran harpooner, 9 years on the water</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('qawasim-1809')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1809</div>
+      <div class="hist-text"><strong>EIC campaign against Qawasim pirates</strong> — launched from Bombay. 80+ Arab vessels destroyed. The sea lanes Frashad sails are a war zone</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('hms-minden')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1810</div>
+      <div class="hist-text"><strong>HMS Minden launched from Bombay</strong> — 74-gun warship built by Parsi shipbuilder Wadia. Francis Scott Key will write "The Star-Spangled Banner" on this ship</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('qawasim-escalation')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1815–18</div>
+      <div class="hist-text"><strong>Qawasim piracy explodes</strong> — British Indian vessels captured, crews murdered. Merchant ships from Surat taken. A "carnival of maritime lawlessness"</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('third-maratha')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1817–18</div>
+      <div class="hist-text"><strong>Third Anglo-Maratha War</strong> — British defeat the Marathas decisively. Maratha territories annexed to Bombay Presidency. The world Frashad left is now entirely British</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <!-- BRANCH POINT -->
+    <div class="branch-block">
+      <h3>&#9670; Branch Point: How Does Frashad Leave the Indian Ocean?</h3>
+      <div class="branch-paths">
+        <div class="branch-path">
+          <h4>Path A — He Runs</h4>
+          <p>He leaves Bombay voluntarily at 18 (1801) after being expelled. Works dhow routes for years. Movement is self-directed — driven by the vision he's running from. Takes the name Fedallah as an act of will.</p>
+        </div>
+        <div class="branch-path">
+          <h4>Path B — He Is Captured</h4>
+          <p>Working on a Parsi trading vessel between Bombay and Muscat (~1812–1815), captured by Qawasim raiders. Sold into slavery. Passes through Arab slave markets. The identity of Fadl Allah is forced by survival.</p>
+        </div>
+        <div class="branch-path">
+          <h4>Path C — Combination</h4>
+          <p>Leaves voluntarily (1801), works the Indian Ocean for a decade as a free man, then captured by Qawasim (~1812). The second exile: first from his community, then from his freedom.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1812</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 29</div>
+          <div class="event-text"><em>Possible Qawasim capture window.</em> If captured: sold in Oman or Aden, moved through the slave pipeline to East Africa</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 30</div>
+          <div class="event-text"><strong>War of 1812 begins.</strong> British blockade devastates Nantucket. Would Ahab have fought? Been impressed? Been stranded at sea?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('war-1812')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1812–15</div>
+      <div class="hist-text"><strong>War of 1812</strong> — British blockade, 10,000 Americans impressed. Nantucket negotiates its own neutrality. Whaling devastated</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1814</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 31</div>
+          <div class="event-text"><strong>Mozambique.</strong> Kills a man for the first time. "Not guilt, exactly, but a kind of recognition." <em>"Druj is not a monster. It is a man going through motions in the dark"</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 32</div>
+          <div class="event-text">War or blockade. Treaty of Ghent ends the War of 1812 (Dec 24)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('golden-age')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1815</div>
+      <div class="hist-text"><strong>50 whalers depart Nantucket</strong> — the golden age of American whaling begins. Second Barbary War (June)</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+  </div>
+
+  <!-- MIDDLE YEARS -->
+  <div class="era">
+    <div class="era-title">The Middle Years — 1819–1830</div>
+
+    <div class="historical-bar" onclick="showPopup('qawasim-1819')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1819</div>
+      <div class="hist-text"><strong>Second EIC campaign against Qawasim</strong> — sails from Bombay (Nov). Ras al-Khaimah destroyed. "Pirate Coast" becomes Trucial States (UAE)</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1820</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 37</div>
+          <div class="event-text"><strong>Canton.</strong> Hears the story of the Essex. A whale that sank a ship <em>on purpose</em>. "That is not chaos. That is the universe enforcing something." <strong>Picks up the black Chinese jacket.</strong> Begins asking about whaling ships. <em>The pivot</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 38</div>
+          <div class="event-text">Pacific whaling. 20+ years at sea. A veteran captain in the making</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('essex')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">Nov 20, 1820</div>
+      <div class="hist-text"><strong>Whaleship Essex rammed and sunk by a sperm whale</strong> — 1,300 miles from land. 20 crew adrift. Cannibalism. 8 survivors. Melville's inspiration</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">1822–23</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 39–40</div>
+          <div class="event-text">Moving from Canton toward the Pacific. Learning the whaling world from its Asian edge</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab fire">
+          <div class="age">Age 40</div>
+          <div class="event-text"><strong>Receives the white scar</strong> — "not till he was full forty years old." From "an elemental strife at sea." Origin unknown. Branded like a lightning-struck tree</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1825</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 42</div>
+          <div class="event-text"><strong>The Pacific. First whaleboat. First harpoon. First kill.</strong> "He never misses." The Nantucket Sleighride. <em>"A priest's son rendering whale blubber in the tryworks' flame — the holiest thing in his ruined religion, defiled daily"</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 43</div>
+          <div class="event-text">25+ years at sea. Captain. The name is known</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1830</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 47</div>
+          <div class="event-text"><strong>Lahaina, Maui.</strong> The whaling capital of the Pacific. He is known: "the Parsee who never misses." <strong>The dreams begin</strong> — a white shape in dark water. <strong>Ahab finds him here.</strong> A captain who needs the best harpooner in the Pacific. He recruits Frashad personally. They sail together. <em>The bond begins</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab fire">
+          <div class="age">Age 48</div>
+          <div class="event-text"><strong>Meets Frashad in Lahaina.</strong> Recruits "the Parsee who never misses" as his harpooner. Sees through the Fadl Allah performance. <em>"You pray like a man who learned the words from a book, not from his father."</em> The thirty years crack. Frashad reveals his real name. Ahab is the first man to know him in three decades</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONVERGENCE -->
+  <div class="era">
+    <div class="era-title">Convergence — 1832–1840</div>
+
+    <div class="timeline-row">
+      <div class="year-col">1832–35</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 49–52</div>
+          <div class="event-text">Still waiting. Still dreaming. The visions grow clearer. He chooses carefully who he sails with. <em>"He is waiting for someone, though he does not know yet who"</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="age">Age 50+</div>
+          <div class="event-text"><strong>Marries</strong> — "a young girl-wife I wedded past fifty, and sailed for Cape Horn the next day." <strong>Son born.</strong> "I widowed that poor girl when I married her"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch-block">
+      <h3>&#9670; Branch Point: When and Where Do They Meet?</h3>
+      <div class="branch-paths">
+        <div class="branch-path">
+          <h4>Option A (strongest) — Lahaina, ~1830. Frashad becomes Ahab's harpooner BEFORE the leg</h4>
+          <p>"The Parsee who never misses." Ahab recruits Frashad personally. They sail together. Ahab sees through the Fadl Allah performance: <em>"You pray like a man who learned the words from a book, not from his father."</em> Frashad reveals his real name. They build the bond over one or two voyages. Then comes the leg voyage. <strong>Frashad is in the boat. He pulls Ahab from the water. He cuts the leg off. He saves the life the universe was trying to end.</strong></p>
+        </div>
+        <div class="branch-path">
+          <h4>Option B — Nantucket, ~1835</h4>
+          <p>Frashad arrives at the center of the whaling world. Ahab is there between voyages. They meet after the leg is already gone. Less shared history but a more dramatic first encounter.</p>
+        </div>
+        <div class="branch-path">
+          <h4>Option C — Indian Ocean, ~1828–32</h4>
+          <p>Ahab sailed everywhere. He could have met Frashad in Muscat, Aden, Zanzibar — the world Frashad came from, before arriving at the world Ahab came from.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1836–39</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="age">Age 53–56</div>
+          <div class="event-text"><strong>Frashad is Ahab's harpooner. He is in the boat.</strong> Moby Dick stoves the whaleboat. Ahab's leg is crushed — not cleanly severed. A sperm whale's jaw grips, it doesn't shear. Frashad pulls Ahab from the wreckage, twists a tourniquet above the wound. <strong>No surgeon aboard. Frashad cuts.</strong> Son of a healer. Knife-healer. <em>Karetô-baêshaza.</em> Under two minutes. No anesthesia. <strong>He saves Ahab's life and creates the cosmic debt he will spend the rest of the novel repaying.</strong> The man who heals bones has cut through one. The man named for the Saoshyant has saved the lizard from the Kar-Fish</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab fire">
+          <div class="age">mid-50s</div>
+          <div class="event-text"><strong>Loses his leg to Moby Dick.</strong> The whale stoves the boat. The leg is crushed in the wreckage — compound fracture, bone through skin. Amputation at sea. No anesthesia. He replaces the leg with whale ivory — <em>nasu</em>, corpse matter — <strong>walks on a piece of the thing that tried to kill him.</strong> Reassembled around the obsession</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('opium-war')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1839</div>
+      <div class="hist-text"><strong>First Opium War begins</strong> — Lin Zexu destroys 20,000 chests of opium at Canton. British warships attack. The world Frashad passed through is burning</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">1840</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="age">Age 57</div>
+          <div class="event-text"><strong>Smuggled aboard the Pequod.</strong> Hidden in the hold with four other men. Below the knowledge of the ship's owners, below Starbuck, below everyone. The running is over. <em>"Asha. I am ready"</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab fire">
+          <div class="age">Age 57–58</div>
+          <div class="event-text"><strong>Ivory leg pierces his groin.</strong> The castration wound. He smuggles Frashad aboard. He has staked everything on a fire-worshipper's prophecy. He has left the Protestant building</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PEQUOD -->
+  <div class="era">
+    <div class="era-title">The Pequod — Christmas 1840 to ~1841</div>
+
+    <div class="convergence-marker">
+      <div class="marker-line"></div>
+      <div class="marker-text">A ship named for a dead tribe. A man from a dying religion. A captain walking on God's bone. They sail on Christmas Day.</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 9</div>
+      <div class="frashad-col"></div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card historical">
+          <div class="event-text"><strong>Father Mapple's Sermon</strong> — Jonah and the whale. "If we obey God, we must disobey ourselves." The entire architecture of the ending, announced before the ship sails. Three days in the whale</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 19</div>
+      <div class="frashad-col"></div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card historical">
+          <div class="event-text"><strong>Elijah warns Ishmael</strong> on the dock. "Anything about your souls?" The Jewish prophet, dismissed as a humbug. First chance refused</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 36</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="event-text">Below decks. Not participating in the oath. His commitment to Ahab predates this ritual. He does not need grog or gold</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text"><strong>The Quarter-Deck.</strong> The oath. The doubloon. "Death to Moby Dick!" Harpooneers drink from their lances</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 48</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="event-text"><strong>Frashad emerges from the hold.</strong> "Five dusky phantoms." The crew sees the devil. Ishmael sees "a muffled mystery." What they are actually seeing is <em>a man's final form</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text">The first whale chase. Ahab reveals his secret crew. Starbuck's trust begins to crack</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 117</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="event-text"><strong>The three prophecies.</strong> Clinging to a dead whale in the dark water together. "Tell me again." Two hearses, he dies first, hemp kills Ahab. <em>The most intimate scene in the novel</em></div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text">"Tell me the prophecy <strong>again</strong>." He has heard it before. He needs to hear it the way a man needs a thing he already knows but cannot hold in the dark</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 119</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="event-text"><strong>Ahab stands on Frashad</strong> and invokes fire worship. "As Persian once did worship." One foot on the prophet. One foot on whale bone. The man who claims fire standing on the man the fire belongs to</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab fire">
+          <div class="event-text"><strong>The Candles.</strong> St. Elmo's fire. Ahab addresses the flame as a Zoroastrian — standing on a Zoroastrian. False Prometheus: he has the vulture but not the gift</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col">Ch. 125</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="event-text">Watching. A mad boy reaches something in Ahab that Fedallah never could. "Thou touchest my inmost centre" — said to Pip, never to the Parsee</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text"><strong>Ahab meets Pip.</strong> "Thou touchest my inmost centre, boy." The last moment of tenderness</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE THREE DAYS -->
+  <div class="era">
+    <div class="era-title">The Three Days — The Chase</div>
+
+    <div class="convergence-marker">
+      <div class="marker-line"></div>
+      <div class="marker-text">Jonah: three days in the whale. Jesus: three days in the tomb. Ahab: three days chasing the whale. Three chances. Three refusals.</div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">Day 1</div>
+      <div class="frashad-col">
+        <div class="event-card frashad">
+          <div class="event-text">Standing in the bow of Ahab's boat. The mission begins. He has been waiting for this since Lahaina. Since Canton. Since Bombay</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text">Moby Dick surfaces. Boats smashed. Men hurt. <strong>First chance to stop.</strong> The neighbors knock on the door</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-row">
+      <div class="year-col highlight">Day 2</div>
+      <div class="frashad-col">
+        <div class="event-card frashad fire">
+          <div class="event-text"><strong>Frashad dies.</strong> Tangled in harpoon lines, dragged under, lashed to the whale's body. The first sacrifice. <em>Not the last</em></div>
+          <div class="avestan" style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:#d4633a; margin-top:8px; letter-spacing:0.08em; font-weight:700;">Asha.</div>
+        </div>
+      </div>
+      <div class="center-line"></div>
+      <div class="ahab-col">
+        <div class="event-card ahab">
+          <div class="event-text">The prophet is dead. The cost is real. <strong>Second chance to stop.</strong> The boat comes. He waves it off</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="death-row">
+      <div class="death-text">
+        <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:700; color:#d4633a; margin-bottom:12px; letter-spacing:0.1em;">DAY 3</div>
+        <strong>Frashad's corpse surfaces on the whale.</strong> Lashed to the white body by harpoon lines. Riding it like a figurehead.<br><br>
+        Starbuck sees the whale swimming away: <strong>"See! Moby Dick seeks thee not. Not too late to desist!"</strong><br><br>
+        <em>The helicopter. The last chance. The universe offering the exit.</em><br><br>
+        <strong>Ahab sees the dead Parsee on the whale. The corpse beckons.</strong><br><br>
+        He attacks. The whale rams the Pequod. The harpoon line catches Ahab's neck. The ship sinks. Everyone dies. Only Ishmael survives, floating on Queequeg's coffin.<br><br>
+        <em>The dead prophet overrules the living. The corpse outranks Starbuck. The prophecy outranks reason. Even dead, Fedallah is still the instrument. His body closes the last door.</em><br><br>
+        <strong>The order holds. Asha endures.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- AFTER -->
+  <div class="era">
+    <div class="era-title">After</div>
+
+    <div class="historical-bar" onclick="showPopup('treaty-nanjing')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1842</div>
+      <div class="hist-text"><strong>Treaty of Nanjing ends First Opium War</strong> — Hong Kong ceded to Britain. The Pequod is already at the bottom of the Pacific</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('melville')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1851</div>
+      <div class="hist-text"><strong>Melville publishes <em>Moby-Dick</em></strong> — Fedallah appears in 15 chapters. "The first fictitious Parsi" in American literature. Melville gets almost everything about Parsees wrong — and accidentally describes exactly what Frashad became</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('petroleum')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">1859</div>
+      <div class="hist-text"><strong>Petroleum discovered in Pennsylvania</strong> — whale oil begins its decline. The industry that employed both men starts dying</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+
+    <div class="historical-bar" onclick="showPopup('parsi-decline')">
+      <div class="hist-marker"></div>
+      <div class="hist-year">2011</div>
+      <div class="hist-text"><strong>Parsi population in India: 57,264</strong> — down from 114,000 in 1941. India launches "Jiyo Parsi" to prevent extinction. ~100,000 Zoroastrians remain worldwide. The fire still burns</div>
+      <div class="link-icon">&#9432;</div>
+    </div>
+  </div>
+
+  <div class="footer-quote">
+    <p>Two men born the same year on opposite sides of the world. One ran from his calling for thirty years. The other created a false calling and followed it to his death. They converged on the same quarterdeck, and the prophet who ran from his vision fulfilled it with his body on the whale.</p>
+    <br>
+    <p>"And I only am escaped alone to tell thee."<br>— Job 1:19</p>
+    <br>
+    <p style="color: #4a3a2a; font-size: 0.9rem;">Frashad was born in Bombay in 1783 — seven islands, three fort gates, a fire temple, a synagogue, a mosque, and the ships his people built. He died in the Pacific Ocean in 1841. No one recorded his name.</p>
+  </div>
+</div>
+
+<!-- POPUPS -->
+<div class="popup-overlay" id="popup-overlay" onclick="hidePopup(event)">
+  <div class="popup" id="popup-content" onclick="event.stopPropagation()">
+    <button class="popup-close" onclick="hidePopup()">&times;</button>
+    <h2 id="popup-title"></h2>
+    <div class="popup-year" id="popup-year"></div>
+    <div id="popup-body"></div>
+  </div>
+</div>
+
+<script>
+const popupData = {
+  'bombay-portugal': {
+    title: 'Portugal Takes Bombay',
+    year: '1534',
+    body: `<p>Sultan Bahadur Shah of Gujarat ceded the seven-island archipelago to Portugal under the Treaty of Bassein. For 127 years, the Portuguese held Bombay — a relatively unremarkable colonial outpost focused on spreading Christianity, with limited trade development.</p>
+    <p>The islands were swampy, malarial, and disconnected. The Portuguese built churches and fortifications but never developed it into a major trading hub.</p>
+    <div class="relevance"><p>Bombay's history as a colonial possession begins here — passed from Gujarat to Portugal, then to England as a wedding gift. The city where Frashad is born has belonged to foreigners for 250 years before his birth.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/History_of_Bombay_under_Portuguese_rule" target="_blank">Wikipedia: Portuguese Bombay &rarr;</a>`,
+  },
+  'bombay-british': {
+    title: 'Bombay Becomes a Wedding Gift — Catherine of Braganza\'s Dowry',
+    year: '1661 (leased to EIC 1668)',
+    body: `<p>In 1661, <strong>Catherine of Braganza</strong>, sister of the King of Portugal, married King Charles II of England. The marriage treaty transferred Bombay along with the port of Tangier, trading privileges, and £300,000 in Portuguese crowns.</p>
+    <p>Charles regarded Bombay as a liability and leased it to the <strong>East India Company on March 27, 1668, for £10 per year.</strong> Governor Gerald Aungier (1669–1677) transformed it — establishing a mint, a printing press, courts, and encouraging migration from the mainland.</p>
+    <p><strong>He invited artisans, weavers, merchants, and traders of all religions to settle.</strong> This is when the Parsis came in significant numbers. A secret article in the marriage treaty obligated England to provide military support to Portugal against the Dutch and Spanish in India.</p>
+    <div class="relevance"><p>Bombay was not conquered. It was given away — twice. First from Gujarat to Portugal, then from Portugal to England as a dowry. The city where Frashad is born exists because of a marriage treaty and a £10 lease. The EIC got Bombay for nothing and built an empire from it.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/History_of_Bombay_under_British_rule_(1661%E2%80%931947)" target="_blank">Wikipedia: British Bombay &rarr;</a>`,
+  },
+  'maratha-wars': {
+    title: 'First Anglo-Maratha War — Salsette Acquired',
+    year: '1775–1782',
+    body: `<p>The <strong>Maratha Confederacy</strong> — the most powerful Hindu political entity in India — fought three wars against the British. The First Anglo-Maratha War ended with the <strong>Treaty of Salbai (1782)</strong>, which gave Britain the island of Salsette, adjacent to Bombay.</p>
+    <p>This was a critical acquisition — Salsette connected Bombay to the mainland. The territory around Bombay was still being contested when Frashad was born the following year.</p>
+    <div class="relevance"><p>Frashad is born the year after this treaty. The land surrounding his home city has just changed hands. The Maratha wars will continue throughout his childhood and beyond — the Second (1803–05) and Third (1817–18) wars will reshape India entirely. He grows up in a city at the edge of contested territory.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/First_Anglo-Maratha_War" target="_blank">Wikipedia: First Anglo-Maratha War &rarr;</a>`,
+  },
+  'anglo-mysore': {
+    title: 'Anglo-Mysore Wars — Hyder Ali and Tipu Sultan',
+    year: '1767–1799 (four wars)',
+    body: `<p><strong>Hyder Ali</strong> and his son <strong>Tipu Sultan</strong> ("the Tiger of Mysore") fought four wars against the British. The Second Anglo-Mysore War (1780–1784) <strong>coincided directly with the American Revolution</strong> — Britain was fighting on two continents simultaneously.</p>
+    <p>Tipu Sultan pioneered iron-cased rocket artillery (Mysorean rockets), used a French-trained army, and allied with France against the British. In <strong>1799</strong>, the British stormed Tipu's capital at Srirangapatna. He died fighting on the walls.</p>
+    <div class="relevance"><p>When Frashad is born in 1783, Britain is losing the American Revolution <em>and</em> fighting Tipu Sultan. Bombay is a military staging ground as much as a trading port. The wars shape the city's entire character — soldiers, surgeons, ships, and the constant preparation for conflict.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Anglo-Mysore_Wars" target="_blank">Wikipedia: Anglo-Mysore Wars &rarr;</a>`,
+  },
+  'panchayat': {
+    title: 'British Empower the Bombay Parsee Panchayat',
+    year: '1787',
+    body: `<p>In 1787, the British delegated authority over community matters to the panchayats of various caste groups, empowering the <strong>Bombay Parsi Panchayat</strong> to administer sanctions and represent the community in dealings with the government.</p>
+    <p>The Panchayat — traditionally dating from the 1670s — enforced community rules (bundubusts) through public meetings (anjumans). It handled family matters, protected spousal rights, prevented bigamy, cared for the poor, and represented Parsis to the colonial government. Violators could be expelled from community life.</p>
+    <div class="relevance"><p>Frashad is 4 years old when the British formalize the Panchayat's power. This is the institution that will discover his secret, judge him, and expel him at 18. Being cast out of the Parsi community in 1801 is not like leaving a neighborhood. It is like losing citizenship in a nation — a nation the British officially empowered when Frashad was a child.</p></div>
+    <a class="wiki-link" href="https://iranicaonline.org/articles/bombay-parsi-panchayat-the-largest-zoroastrian-institution-in-modern-history" target="_blank">Iranica Online: Bombay Parsi Panchayat &rarr;</a>`,
+  },
+  'gujarat-famine': {
+    title: 'Gujarat Famine — Parsi Migration Wave',
+    year: '1790',
+    body: `<p>A devastating famine struck Gujarat — the ancestral homeland of most Bombay Parsis. Waves of refugees flooded into Bombay. The Parsi population in Bombay <strong>quadrupled between 1780 and 1812</strong>, rising from roughly 9,200 to over 36,000, largely driven by this migration and subsequent waves.</p>
+    <p>A second large wave of Parsi migration followed a major fire in Surat in 1837.</p>
+    <div class="relevance"><p>Frashad is 7 years old. His community is suddenly expanding, crowded with new arrivals from Gujarat — frightened, hungry, displaced. The Bombay he grows up in is not stable. It is a refugee city. The cosmopolitan energy he absorbs — multiple languages, multiple communities, the ability to move between worlds — is partly a survival response to a city in flux.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Parsis" target="_blank">Wikipedia: Parsis &rarr;</a>`,
+  },
+  'bene-israel': {
+    title: 'Bene Israel Jews Build "The Gate of Mercy" Synagogue',
+    year: '1796',
+    body: `<p>The <strong>Bene Israel</strong> — native Jews from Konkan villages south of Bombay, known as "Shanivar Teli" (Saturday oil-pressers) because they abstained from work on the Sabbath — had lived in western India for centuries. Their first community member moved to Bombay in 1746.</p>
+    <p>In <strong>1796</strong>, Samuel Ezekiel Divekar established <strong>"The Gate of Mercy" (Sha'ar HaRahamim)</strong> — Bombay's first synagogue.</p>
+    <p>Bombay also had <strong>Baghdadi Jews</strong> — Sephardic merchants from Iraq. The most famous, David Sassoon, would arrive in 1832 and establish a banking dynasty. Both communities occupied similar positions to the Parsis: merchant minorities, neither Hindu nor Muslim, tolerated by the British as useful intermediaries.</p>
+    <div class="relevance"><p>Frashad is 13 when the Jews of Bombay build their first synagogue. Two ancient religions, both survivors, both minority communities maintaining identity against surrounding majorities. The Zoroastrian concept of cosmic exile and the Jewish concept of diaspora are eerily parallel. A healer's son in a cosmopolitan port city would have known Bene Israel families.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/History_of_the_Jews_in_Mumbai" target="_blank">Wikipedia: Jews in Mumbai &rarr;</a>`,
+  },
+  'treaty-bassein': {
+    title: 'Treaty of Bassein / Second Anglo-Maratha War',
+    year: '1802–1805',
+    body: `<p>Peshwa Baji Rao II accepted British protection under the <strong>Treaty of Bassein (December 1802)</strong>, giving Britain its first mainland territory in the Konkan region around Bombay. The Second Anglo-Maratha War (1803–05) followed, resulting in major British territorial gains.</p>
+    <p>For the first time, British control extended beyond the islands of Bombay onto the surrounding mainland. The city was no longer an isolated outpost — it was the center of a growing territorial empire.</p>
+    <div class="relevance"><p>Frashad left Bombay in 1801. By 1802, the city he fled is expanding in ways he will never see. The mainland he crossed on foot during his flight is now British territory. The world he left is growing behind him, becoming more powerful, more connected, and more impossible to return to.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Treaty_of_Bassein_(1802)" target="_blank">Wikipedia: Treaty of Bassein &rarr;</a>`,
+  },
+  'third-maratha': {
+    title: 'Third Anglo-Maratha War — British Supremacy Established',
+    year: '1817–1818',
+    body: `<p>The Third and final Anglo-Maratha War ends with decisive British victory. Maratha territories — the most powerful remaining Hindu political entity — are annexed to the Bombay Presidency. British supremacy in India is established.</p>
+    <p>The Bombay that Frashad left as a terrified 18-year-old in 1801 — a fortified settlement on seven islands surrounded by contested Maratha territory — has become the administrative center of a vast presidency stretching across western India.</p>
+    <div class="relevance"><p>Frashad is 34–35, somewhere in the Indian Ocean or beyond, when this happens. The world he fled has been utterly transformed. The Parsi community he was expelled from is now more powerful than ever — integrated into British colonial infrastructure, building warships, trading with China. He can never go back.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Third_Anglo-Maratha_War" target="_blank">Wikipedia: Third Anglo-Maratha War &rarr;</a>`,
+  },
+  'zoroaster': {
+    title: 'Zarathustra and the Founding of Zoroastrianism',
+    year: '~1500–1000 BCE (debated)',
+    body: `<p>Zarathustra (Zoroaster) received divine revelation from Ahura Mazda, the Wise Lord, establishing a religion built on the cosmic battle between <strong>Asha</strong> (truth/order) and <strong>Druj</strong> (the lie/chaos). It became the state religion of three successive Persian empires.</p>
+    <p>Core teaching: the universe was created good, corrupted by Angra Mainyu (the Destructive Spirit), and will be restored at <strong>Frashokereti</strong> — the final renovation. Frashad's name comes from this word.</p>
+    <div class="relevance"><p>Frashad is born 3,000 years after the founding of his religion. He is raised in its deepest traditions — and then expelled from them. His entire life is shaped by a theology he can never fully escape.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Zoroaster" target="_blank">Wikipedia: Zoroaster &rarr;</a>`,
+  },
+  'arab-conquest': {
+    title: 'Arab Conquest of Sassanid Persia',
+    year: '637–651 CE',
+    body: `<p>The Muslim conquest of Persia ended the Sassanid Empire and Zoroastrianism's status as a state religion. Over centuries, Zoroastrians faced conversion pressure, special taxes (jizya), periodic persecution, and social marginalization.</p>
+    <p>Many converted. Some fled. A small community — the <strong>Parsis</strong> — eventually migrated to western India, where they preserved the faith.</p>
+    <div class="relevance"><p>This is the event that made Frashad possible. Without the conquest, there are no Parsis in Bombay. His entire existence — his birth, his faith, his exile — flows from a military defeat over a thousand years before he was born.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Muslim_conquest_of_Persia" target="_blank">Wikipedia: Muslim conquest of Persia &rarr;</a>`,
+  },
+  'parsi-migration': {
+    title: 'Parsi Migration to India — "Sugar in the Milk"',
+    year: '~716 CE (traditional date)',
+    body: `<p>According to the Qissa-i Sanjan, Zoroastrian refugees fled Persia and landed at Sanjan in Gujarat. The local Hindu king Jadi Rana hesitated. The Parsi leader pointed to a full cup of milk — the kingdom is full, there is no room.</p>
+    <p>The Parsi priest added sugar to the milk. It dissolved without overflowing. <em>We will sweeten your land without displacing anyone.</em></p>
+    <p>The king permitted them to stay. They adopted Gujarati, local dress, and promised not to proselytize. They kept their fire.</p>
+    <div class="relevance"><p>Frashad's ancestors made a promise: we will dissolve into your world but keep our flame. Frashad breaks the dissolving — his visions make him visible — and loses the flame. Or does he?</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Qissa-i_Sanjan" target="_blank">Wikipedia: Qissa-i Sanjan &rarr;</a>`,
+  },
+  'behafarid': {
+    title: 'Behāfarīd — The Prophet His Own Priests Killed',
+    year: '~747–749 CE',
+    body: `<p>A Zoroastrian man from Khorasan who claimed divine revelation. He prescribed seven daily prayers, banned wine, restricted animal slaughter, and called for charity. His reforms were compassionate — and unauthorized.</p>
+    <p>The Zoroastrian priests checked the cosmic calendar: it wasn't time for a new prophet. Therefore his visions came from Angra Mainyu. Therefore he was a <strong>yatu</strong> (sorcerer).</p>
+    <p>The priests went to <strong>Abu Muslim</strong>, the Muslim general conquering their own homeland, and asked him to kill Behāfarīd. He was hanged at the gate of the Friday Mosque.</p>
+    <div class="relevance"><p>The precedent. Zoroastrian priests handed their own prophet to Muslim authorities because he claimed to speak for God outside their sanctioned channels. If Frashad's visions draw the same charge — yatu — this is what the community does to people like him.</p></div>
+    <a class="wiki-link" href="https://iranicaonline.org/articles/behafarid-zoroastrian-heresiarch-and-self-styled-prophet-killed-131-748-49" target="_blank">Iranica Online: Behāfarīd &rarr;</a>`,
+  },
+  'pequot': {
+    title: 'The Pequot War and the Mystic Massacre',
+    year: '1636–1638 (Massacre: May 26, 1637)',
+    body: `<p>English colonists and their Mohegan and Narragansett allies attacked the fortified Pequot village at Mystic. They set the wooden palisade on fire, blocked the exits, and shot anyone who tried to escape. <strong>400–700 Pequot were killed</strong> — men, women, children.</p>
+    <p>The Treaty of Hartford (1638) didn't just defeat the Pequot. It tried to <strong>erase them</strong>: survivors were forbidden from returning to their lands, speaking their language, or <strong>calling themselves Pequot</strong>.</p>
+    <div class="relevance"><p>Melville named his doomed ship after this. The Pequod carries its own doom in its name. A man from a dying religion sails on a ship named for a dead people. Both the Pequot name and Frashad's name were erased — one by treaty, one by exile.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Pequot_War" target="_blank">Wikipedia: Pequot War &rarr;</a>`,
+  },
+  'sperm-whale': {
+    title: 'First Sperm Whale Killed from Nantucket',
+    year: '1712',
+    body: `<p>Christopher Hussey, blown offshore by a storm, encountered and killed a sperm whale — the first taken by Nantucket whalers. Sperm oil was far more valuable than right whale oil, burning brighter and cleaner.</p>
+    <p>This single kill launched the deep-ocean whaling industry that would define Nantucket, employ Ahab and Frashad, and inspire Melville's novel 139 years later.</p>
+    <div class="relevance"><p>The industry that brings Frashad and Ahab together begins with this moment. Without sperm whaling, there is no Pequod, no voyage, no confrontation with Moby Dick.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/History_of_whaling" target="_blank">Wikipedia: History of Whaling &rarr;</a>`,
+  },
+  'french-rev': {
+    title: 'French Revolution / Pacific Whaling Begins',
+    year: '1789',
+    body: `<p>The French Revolution begins. Across the world, the British whaling vessel <em>Amelia</em> becomes the first to round Cape Horn into the Pacific Ocean, opening vast new whaling grounds.</p>
+    <p>Frashad is 6. Ahab is 7. The world they will inhabit as adults is being built.</p>
+    <div class="relevance"><p>The Pacific whaling grounds that the Amelia opens are where Frashad and Ahab will meet, hunt, and die. The revolution reshapes European politics; the Amelia reshapes the ocean.</p></div>`,
+  },
+  'barbary-tribute': {
+    title: 'U.S. Pays Tribute to Barbary Pirates',
+    year: '1795',
+    body: `<p>The United States concludes treaties with Algiers, Tunis, and Tripoli, agreeing to pay annual tribute to protect American merchant ships from piracy in the Mediterranean. The treaty with Algiers frees 83 American sailors held captive.</p>
+    <div class="relevance"><p>The Barbary Wars foreshadow the Qawasim piracy that may ensnare Frashad. Different ocean, same pattern: maritime powers paying or fighting pirates who control trade routes. American ships are not safe anywhere.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Barbary_Wars" target="_blank">Wikipedia: Barbary Wars &rarr;</a>`,
+  },
+  'barbary-war-1': {
+    title: 'First Barbary War',
+    year: '1801–1805',
+    body: `<p>The Pasha of Tripoli declares war on the United States over tribute payments. The U.S. Navy fights its first overseas war. In 1803, Barbary pirates capture the USS Philadelphia and enslave its crew. In February 1804, Stephen Decatur leads a raid to burn the captured ship — Lord Nelson calls it "the most bold and daring act of the Age."</p>
+    <div class="relevance"><p>While Frashad flees Bombay and Ahab first goes to sea, the U.S. is fighting pirates in the Mediterranean. Piracy, capture, and enslavement of sailors is not exotic — it is the reality of the ocean in this era. If Frashad is captured by Qawasim raiders a decade later, it is part of a global pattern.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/First_Barbary_War" target="_blank">Wikipedia: First Barbary War &rarr;</a>`,
+  },
+  'uss-philadelphia': {
+    title: 'USS Philadelphia Captured — Crew Enslaved',
+    year: '1803',
+    body: `<p>The frigate USS Philadelphia runs aground while patrolling Tripoli harbor. Barbary pirates capture the ship and imprison its crew of over 300. The men are held as slaves for 19 months.</p>
+    <p>In February 1804, Lieutenant Stephen Decatur leads a small crew on a captured ketch into the harbor at night. They board the Philadelphia, kill the guards, set the ship ablaze, and escape without a single American casualty.</p>
+    <div class="relevance"><p>American sailors enslaved by Muslim pirates in the Mediterranean — the same year Frashad reaches Zanzibar. Enslavement of sailors is not a rare event but a routine danger of this era. The ocean takes people.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/USS_Philadelphia_(1799)" target="_blank">Wikipedia: USS Philadelphia &rarr;</a>`,
+  },
+  'qawasim-1809': {
+    title: 'First EIC Campaign Against Qawasim Pirates',
+    year: '1809',
+    body: `<p>The British East India Company and Royal Navy launch a joint expedition from Bombay against the <strong>Qawasim tribal confederacy</strong> — Arab raiders controlling the Arabian Gulf coast from Qatar to Oman. Over 80 vessels destroyed, three bases sacked.</p>
+    <p>But the campaign fails to permanently suppress piracy. By 1811, attacks resume. A second, larger campaign will be needed in 1819.</p>
+    <div class="relevance"><p>These are the exact sea lanes Frashad sails. A Parsi merchant or ship's clerk heading from Bombay toward Muscat between 1812–1818 sailed directly through Qawasim hunting grounds. If Frashad was captured, this is the world that took him.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Persian_Gulf_campaign_of_1809" target="_blank">Wikipedia: Persian Gulf campaign of 1809 &rarr;</a>`,
+  },
+  'war-1812': {
+    title: 'War of 1812 — Impact on Whaling',
+    year: '1812–1815',
+    body: `<p>Britain and the United States go to war. The British Royal Navy blockades the American coast. Nantucket's whaling industry is devastated almost immediately — the schooner <em>Mount Hope</em> is burned by the Royal Navy within a month of the declaration.</p>
+    <p>About <strong>10,000 American sailors were impressed</strong> into the British navy during the Napoleonic era. Nantucket, desperate and abandoned by the federal government, negotiates its own neutrality with the Royal Navy.</p>
+    <div class="relevance"><p><strong>Ahab is 30 years old, a veteran harpooner.</strong> He may have been impressed, blockaded, stranded at sea, or forced to sit out the war on Nantucket. The war disrupted every American whaler's life for three years. What was Ahab doing?</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/War_of_1812" target="_blank">Wikipedia: War of 1812 &rarr;</a>`,
+  },
+  'golden-age': {
+    title: 'The Golden Age of Whaling Begins',
+    year: '1815',
+    body: `<p>With the War of 1812 over, <strong>fifty whalers depart Nantucket</strong> in a single season. American whaling explodes into the Pacific and Indian Oceans. Between 1820 and 1850, the United States dominates global whaling. New Bedford overtakes Nantucket as the whaling capital.</p>
+    <div class="relevance"><p>This is the world Ahab returns to — and the world Frashad is moving toward from the other direction. The golden age creates the economic machinery that puts both men on the Pequod.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/History_of_whaling" target="_blank">Wikipedia: History of Whaling &rarr;</a>`,
+  },
+  'qawasim-1819': {
+    title: 'Second EIC Campaign Against Qawasim',
+    year: '1819–1820',
+    body: `<p>A second, larger British expedition sails from Bombay in November 1819. Ras al-Khaimah is destroyed. Arab fortifications along the Gulf coast are demolished from Al-Rams to Dubai. The General Maritime Treaty of 1820 establishes British control over the region.</p>
+    <p>The "Pirate Coast" becomes the Trucial States — today the United Arab Emirates.</p>
+    <div class="relevance"><p>The British are pacifying the exact waters Frashad has been sailing for years. If he was captured by Qawasim raiders, these campaigns may have freed him — or made his captivity more dangerous. Parsi trading networks were deeply involved in these waters.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Persian_Gulf_campaign_of_1819" target="_blank">Wikipedia: Persian Gulf campaign of 1819 &rarr;</a>`,
+  },
+  'essex': {
+    title: 'The Whaleship Essex — Sunk by a Whale',
+    year: 'November 20, 1820',
+    body: `<p>The Nantucket whaleship <em>Essex</em>, captained by George Pollard Jr., is rammed and sunk by a sperm whale in the South Pacific, 1,300 miles from land. The whale was estimated at 85 feet. It hit the ship <strong>twice</strong> — it turned around and came back.</p>
+    <p>20 crew in three whaleboats. Three months adrift. Starvation. Cannibalism. Eight survivors.</p>
+    <p>The story reaches every port in the world. It is the most famous maritime disaster of the era. Herman Melville will use it as the seed of <em>Moby-Dick</em>.</p>
+    <div class="relevance"><p><strong>Frashad hears this story in Canton.</strong> Every sailor tells it differently. He sits in a corner and says nothing. Something moves in him: "A whale that sinks a ship on purpose is not chaos. That is the universe enforcing something." He begins asking about whaling ships. This is the pivot of his life.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Essex_(whaleship)" target="_blank">Wikipedia: Essex (whaleship) &rarr;</a>`,
+  },
+  'opium-war': {
+    title: 'First Opium War',
+    year: '1839–1842',
+    body: `<p>Imperial Commissioner Lin Zexu destroys over 20,000 chests of British-smuggled opium at Canton. Britain responds with warships. Hong Kong is occupied in January 1841. Canton is attacked in May 1841. The war ends with the Treaty of Nanjing (August 1842), ceding Hong Kong to Britain.</p>
+    <p>Canton — the single port where Western merchants traded with China — is devastated. Parsi merchants from Bombay were part of this opium trade.</p>
+    <div class="relevance"><p>The port where Frashad heard the Essex story, where he picked up the Chinese jacket, where he pivoted toward whaling — is now a war zone. The Opium War is happening during the Pequod's voyage. The world Frashad passed through is burning behind him.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/First_Opium_War" target="_blank">Wikipedia: First Opium War &rarr;</a>`,
+  },
+  'treaty-nanjing': {
+    title: 'Treaty of Nanjing',
+    year: 'August 29, 1842',
+    body: `<p>The Treaty of Nanjing ends the First Opium War. China cedes Hong Kong Island to Britain, opens five treaty ports, pays an indemnity of 21 million silver dollars. It begins China's "century of humiliation."</p>
+    <div class="relevance"><p>The Pequod is already at the bottom of the Pacific when this treaty is signed. The world moves on. No one notices a missing whaling ship.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Treaty_of_Nanking" target="_blank">Wikipedia: Treaty of Nanjing &rarr;</a>`,
+  },
+  'melville': {
+    title: 'Melville Publishes Moby-Dick',
+    year: '1851',
+    body: `<p>Herman Melville publishes <em>Moby-Dick; or, The Whale</em>. It sells poorly. It is not recognized as a masterpiece until the 1920s.</p>
+    <p>Fedallah appears in 15 chapters. Melville calls him the first fictional Parsee in American literature. He gets almost everything about Parsees wrong — the turban, the clothing, the hair. But he accidentally describes exactly what Frashad became: a man who has traveled more of the world than almost anyone alive, stripped of every identity, wearing pieces of everywhere he has been.</p>
+    <div class="relevance"><p>Melville saw Fedallah without understanding him. The novel FRASHAD explains what Melville saw.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Moby-Dick" target="_blank">Wikipedia: Moby-Dick &rarr;</a>`,
+  },
+  'petroleum': {
+    title: 'Petroleum Discovered in Pennsylvania',
+    year: '1859',
+    body: `<p>Edwin Drake drills the first successful oil well in Titusville, Pennsylvania. Kerosene begins replacing whale oil for lighting. The whaling industry enters its long decline.</p>
+    <div class="relevance"><p>The industry that employed both Frashad and Ahab — that brought them together, gave them purpose, and killed them — starts dying eighteen years after the Pequod sinks. The ocean that consumed them is already being replaced by a hole in the ground in Pennsylvania.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Pennsylvania_oil_rush" target="_blank">Wikipedia: Pennsylvania oil rush &rarr;</a>`,
+  },
+  'parsi-decline': {
+    title: 'Zoroastrian Population Decline',
+    year: 'Ongoing',
+    body: `<p>The Parsi population in India peaked at <strong>114,000 in 1941</strong> and has declined to roughly <strong>57,264 by 2011</strong>. The global Zoroastrian population is estimated at 100,000–120,000 — one of the smallest religious communities on Earth.</p>
+    <p>India launched the <strong>"Jiyo Parsi" ("Live Parsi")</strong> scheme in 2013 to try to prevent the community's extinction through fertility assistance and community support. As of 2024, 232 babies have been born through the program.</p>
+    <div class="relevance"><p>Frashad belongs to a religion that has been dying for over a thousand years. He sailed on a ship named for a dead people. Both the Pequot and the Zoroastrians were nearly erased. The fire still burns — but barely.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Zoroastrian_population_decline" target="_blank">Wikipedia: Zoroastrian population decline &rarr;</a>`,
+  },
+  'jundishapur': {
+    title: 'Academy of Jundishapur — World\'s First Teaching Hospital',
+    year: '3rd–7th century CE (Sassanid Persia)',
+    body: `<p>The Academy of Gundishapur was the world's first <strong>teaching hospital and academic medical center</strong>, established during the Sassanid dynasty. It assembled Greek, Indian, Syriac, Persian, Jewish, and Zoroastrian medical traditions under one roof.</p>
+    <p>The Persians pioneered the <strong>bimaristan</strong> ("place for the sick") — the template for the modern hospital. Medical record-keeping, physician licensure, and systematic training all originated here. The entire Islamic hospital system was built directly on this Zoroastrian-Persian model.</p>
+    <div class="relevance"><p>Frashad's religion didn't just allow medicine — it <strong>invented organized medicine</strong>. The Vendidad classifies three types of physician: knife-healer (surgeon), herb-healer, and manthra-healer (holy word). If Frashad's father is a healer, he stands in a tradition stretching back through Jundishapur to the Avesta itself.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Academy_of_Gundishapur" target="_blank">Wikipedia: Academy of Gundishapur &rarr;</a>`,
+  },
+  'tourniquet': {
+    title: 'Invention of the Screw-Compressor Tourniquet',
+    year: '1718',
+    body: `<p>French surgeon <strong>Jean Louis Petit</strong> developed the screw-compressor tourniquet — a device that clamped down on a patient's limb to stop arterial bleeding during amputation. It has been called <strong>"the most important surgical advancement before the advent of anesthesia."</strong></p>
+    <p>Before Petit's tourniquet, controlling hemorrhage during amputation was unreliable and often fatal. The tourniquet made limb amputation a survivable procedure — though still agonizing, as anesthesia would not arrive for another 124 years.</p>
+    <div class="relevance"><p>This is the tool that saves Ahab's life. When Moby Dick stoves the whaleboat and crushes Ahab's leg, a tourniquet — twisted tight above the wound — stops the bleeding long enough for an amputation. Without Petit's invention, Ahab bleeds to death in the water and there is no novel.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Tourniquet" target="_blank">Wikipedia: Tourniquet &rarr;</a>`,
+  },
+  'british-surgeon-law': {
+    title: 'Britain Requires Surgeons on Whaling Ships',
+    year: '1733',
+    body: `<p>The British Parliament passes legislation requiring all whaling vessels to carry a qualified <strong>ship's surgeon</strong>. This law applied to British-flagged ships operating out of ports like London, Hull, and eventually Bombay.</p>
+    <p><strong>American whaling ships were not subject to this law</strong> and frequently sailed without any medical officer at all. Many carried only a medicine chest with numbered tinctures keyed to a pamphlet — often incomprehensible to the captain who was supposed to use it.</p>
+    <div class="relevance"><p>British ships at Bombay had surgeons. American whalers often did not. If Ahab's ship had no surgeon when Moby Dick crushed his leg, someone else had to cut. A Parsi harpooner from a healing family, "extraordinary with a long blade," might be the only man on board who knows how flesh yields and where bone resists.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Ship%27s_surgeon" target="_blank">Wikipedia: Ship's surgeon &rarr;</a>`,
+  },
+  'wadia-shipbuilders': {
+    title: 'Wadia Family — Parsi Shipbuilders of Bombay',
+    year: '1736–1850s',
+    body: `<p>The <strong>Wadia family</strong>, Parsis from Surat, became the most important shipbuilders in Bombay. Lowjee Nusserwanjee Wadia contracted with the EIC in 1736 and built India's first dry dock in 1750. By the 1840s, the family had built <strong>over 100 warships for Britain</strong>.</p>
+    <p><strong>HMS Minden</strong> (1810) — 74-gun ship of the line, built in Bombay by Jamsetjee Bomanjee Wadia. Francis Scott Key later wrote "The Star-Spangled Banner" aboard this Parsi-built ship.</p>
+    <p><strong>HMS Trincomalee</strong> (1817) — built in Bombay by the Wadias, now the oldest surviving British warship, on display in Hartlepool, England.</p>
+    <div class="relevance"><p>Parsis didn't just live in Bombay. They <strong>built the British navy's Indian fleet</strong>. Frashad's community was deeply integrated into maritime infrastructure. A healer's son growing up around the Bombay dockyards would see British surgeons arriving on ships his community built. Naval medicine was not foreign — it was ambient.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Wadia_family" target="_blank">Wikipedia: Wadia family &rarr;</a>`,
+  },
+  'napoleonic-surgery': {
+    title: 'Napoleonic Wars — Revolution in Naval Surgery',
+    year: '1793–1815',
+    body: `<p><strong>Dominique Jean Larrey</strong> (1766–1842), Napoleon's chief surgeon, revolutionized military medicine. He invented the <strong>"flying ambulance"</strong> for rapid battlefield evacuation, established <strong>triage</strong> (treating by injury severity regardless of rank), and perfected field amputation techniques.</p>
+    <p>By the end of the Napoleonic Wars, a competent surgeon could complete an amputation in <strong>under two minutes</strong>. French surgeon Lisfranc amputated at the thigh in 10 seconds. Scottish surgeon Benjamin Bell could cut through all but the bone in 6 seconds. Speed was the only mercy available without anesthesia.</p>
+    <p>Surgeons trained in these wars cycled through every major port — including <strong>Bombay</strong>, where British naval and EIC vessels were built, crewed, and provisioned.</p>
+    <div class="relevance"><p>The amputation techniques that could save Ahab's life were perfected during these wars. Surgeons trained in Napoleonic field hospitals served on ships that docked in Bombay. Frashad's father — if he was a healer near the docks — would have been aware of European surgical methods alongside his own tradition.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Dominique_Jean_Larrey" target="_blank">Wikipedia: Dominique Jean Larrey &rarr;</a>`,
+  },
+  'qawasim-escalation': {
+    title: 'Qawasim Piracy Escalation — British Ships Attacked',
+    year: '1815–1818',
+    body: `<p>After the 1809 peace treaty broke down, the Qawasim <strong>"indulged in a carnival of maritime lawlessness"</strong>:</p>
+    <ul><li><strong>1815:</strong> Capture and murder of most of a British Indian vessel's crew near Muscat</li>
+    <li><strong>January 6, 1815:</strong> Armed pattamar <em>Deriah Dowlut</em> captured; 17 of 38 Indian crew murdered</li>
+    <li><strong>1816:</strong> Three British-flagged merchant vessels from Surat captured; most crews killed</li></ul>
+    <p>The victims were not only British warships. The Qawasim attacked <strong>merchant vessels, trading dhows, and Indian-crewed ships flying British colors.</strong></p>
+    <div class="relevance"><p>A Parsi trading dhow sailing from Bombay toward Muscat is a natural target. The Qawasim made no distinction between British warships and Indian merchant vessels. If Frashad was on a Parsi-owned trading vessel in these waters, he sailed through active pirate hunting grounds.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/Piracy_in_the_Persian_Gulf" target="_blank">Wikipedia: Piracy in the Persian Gulf &rarr;</a>`,
+  },
+  'hms-minden': {
+    title: 'HMS Minden Launched from Bombay',
+    year: '1810',
+    body: `<p><strong>HMS Minden</strong>, a 74-gun Ganges-class ship of the line, was launched from Bombay on June 19, 1810. Built of Indian teak by Parsi master shipbuilder <strong>Jamsetjee Bomanjee Wadia</strong> at the Duncan Docks.</p>
+    <p>The ship later served in the War of 1812. On September 14, 1814, during the bombardment of Fort McHenry in Baltimore, Francis Scott Key wrote "The Star-Spangled Banner" — reportedly while aboard or in sight of this Parsi-built warship.</p>
+    <div class="relevance"><p>Frashad is 27 years old when HMS Minden launches from the docks of his home city, built by men from his community. The American national anthem was written on a ship built by Zoroastrians. The connections between Bombay, the British navy, and America run deeper than anyone remembers.</p></div>
+    <a class="wiki-link" href="https://en.wikipedia.org/wiki/HMS_Minden_(1810)" target="_blank">Wikipedia: HMS Minden &rarr;</a>`,
+  },
+};
+
+function showPopup(id) {
+  const data = popupData[id];
+  if (!data) return;
+  document.getElementById('popup-title').textContent = data.title;
+  document.getElementById('popup-year').textContent = data.year;
+  document.getElementById('popup-body').innerHTML = data.body;
+  document.getElementById('popup-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function hidePopup(e) {
+  if (e && e.target !== document.getElementById('popup-overlay') && !e.target.classList.contains('popup-close')) return;
+  document.getElementById('popup-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById('popup-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+</body>
+</html>

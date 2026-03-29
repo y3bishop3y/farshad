@@ -156,6 +156,42 @@ This is the most intimate scene between them in the entire novel. Two men in a b
 
 This is the pattern of his life. He speaks truth. No one hears it correctly. In Bombay, they heard sorcery. On the Pequod, Ahab hears immortality. The content is always the same. The reception is always wrong.
 
+### The Language Problem — Why Does a Parsee Prophesy in American English?
+
+This is a thread worth pulling on because it reveals something about Frashad's transformation.
+
+**The word "hearse":**
+
+A hearse is a funeral carriage — a Western, Christian concept. The word comes from Old French *herse*, from Latin *hirpex* (a harrow). By the 1640s it meant the vehicle carrying a coffin. In 1840s America, hearses were horse-drawn carriages with glass panels and velvet draperies — an East Coast tradition, seldom seen west of the Mississippi.
+
+**Zoroastrians do not use hearses.** They don't use coffins. They don't bury the dead. The dead body is *nasu* — corpse matter, the most ritually polluting substance in existence. The body is carried to a **dakhma** (Tower of Silence) — a circular raised stone structure — and placed on gratings where vultures consume the flesh. The bones fall into a central pit. No casket. No funeral carriage. No procession with a hearse.
+
+If Frashad were prophesying in Zoroastrian terms, he would never say "hearse." He would say something about the dakhma, or about the nasā-sālār (corpse-bearer), or about the vultures, or about the body being exposed to the sky. The word "hearse" belongs to a world Frashad was not born into.
+
+**The word "hemp":**
+
+"Hemp only can kill thee." Hemp rope was the standard material for whale-lines in the Nantucket and New Bedford whaling industry. Melville himself describes it in Chapter 60 ("The Line"): the whale-line was "originally made of the best hemp." Nantucket had **ten ropewalks** processing hemp into rope. The New Bedford Cordage Company was founded in 1842 specifically to supply whaling ships.
+
+Hemp rope is how Ahab dies — the harpoon line catches around his neck and drags him under. But "hemp" as a term for rope is maritime New England vocabulary. In the Indian Ocean dhow world Frashad came from, ropes were made of coir (coconut fiber), not hemp. The Arab and East African maritime tradition used different materials and different words.
+
+**"The visible wood of the last one must be grown in America":**
+
+Frashad specifies that the second hearse's wood must be "grown in America." This is a man who has been in the Western hemisphere for perhaps 15–20 years by this point. He knows what America is. He knows American wood from Indian wood. But the specificity of this phrasing — "grown in America" — is the language of a man who has absorbed American categories. A man speaking from inside Zoroastrian or Hindu cosmology might say "from the land across the great water" or frame it in terms of direction (West). "America" is a political and cultural category he learned.
+
+### What This Means for the Novel
+
+**The obvious answer:** Melville wrote in English for an American audience. He put American words in Fedallah's mouth because he was writing a novel, not a linguistics exercise. The prophecy is in English because the book is in English. This is real and shouldn't be dismissed.
+
+**The deeper answer for FRASHAD:** By the time Frashad delivers these prophecies, he has been in the American whaling world for 15–20 years. He learned English from British sailors in Bombay ports, then refined it on American whaling ships in the Pacific. He has been in Lahaina. He has been in Nantucket. He has seen hearses — horse-drawn funeral carriages rolling through the streets of New Bedford and Nantucket Town, carrying dead whalers' widows' husbands to Christian cemeteries. He knows what hemp is because he has handled thousands of fathoms of it, coiled in the tubs of whaleboats.
+
+**The prophecy is in American English because Frashad has become American.** Not by citizenship, not by identity, not by choice — but by absorption. Thirty years of ocean have washed away the Gujarati, softened the Avestan, layered in Arabic and Swahili and Portuguese and English. The vision comes in whatever language fits the listener. When he spoke to himself in Bombay at eighteen, the visions came in images of fire and the dakhma. When he speaks to Ahab in the dark water off the Pacific, the visions come in hearses and hemp because **those are the words Ahab will understand.**
+
+A prophet doesn't choose the language of prophecy. The prophecy chooses the language of the man who needs to hear it. Frashad sees the future. His mind translates it into the only vocabulary the captain will recognize — New England funeral customs and Nantucket rope.
+
+**The theological twist:** This is Frashad's tragedy encoded in his own words. He prophesies in American. Not in Avestan, not in Gujarati, not in Arabic. The man who hid his Zoroastrian soul for thirty years, who whispered the *Ashem Vohu* inside the Islamic *fajr*, who kept the fire alive by covering it — when he finally speaks his deepest truth, the most important words he will ever say, he says them in the language of the country that doesn't know he exists. He doesn't say "dakhma." He says "hearse." He has been away from home so long that even his prophecies have been translated.
+
+The fire still burns. But it speaks English now.
+
 ---
 
 ## Chapter 119: "The Candles" — Fire
@@ -183,6 +219,54 @@ Is this Asha? Is this Druj? Is there a difference anymore?
 The fire on the masts is not sacred. It's electrical. It's physics. But it looks like the fire he knew. It looks like the fire temple at dawn when his father had not arrived yet and he tended the flame alone and everything in the universe seemed briefly to be in its right place.
 
 It looks like home. And it is the furthest thing from home he has ever seen.
+
+### Ahab as False Prometheus
+
+Ahab thinks he is Prometheus. The American self-myth: I defied the gods. I stole fire. I am punished for my daring. The vulture eats my liver every day because I am great enough to suffer.
+
+But Prometheus actually did something. Prometheus stole fire **for humanity.** His crime was an act of love — he gave mankind the means to survive, to cook, to forge, to see in the dark. He suffered for others. His punishment was the price of a gift.
+
+Ahab stole nothing. He gave no one anything. He survived a whale attack. He took it personally. He turned his missing leg into a cosmic grievance and dragged thirty men to their deaths. He has the vulture — every step on the ivory leg, every thump on the deck, the wound reopening daily — but he doesn't have the fire. He has the suffering without the purpose. He is Prometheus without the gift.
+
+**And Frashad is the one who actually has the fire.** He is the son of a Mobed. His father tended the Atash Bahram — the highest grade of sacred fire in Zoroastrianism, a fire that has been burning continuously for centuries, fed with sandalwood and prayers. Fire is Frashad's inheritance. Fire is his birthright. Fire is what his family was born to protect.
+
+He lost it. He was expelled. He hasn't stood before a sacred fire in thirty years. The fire was taken from him — not by a god, but by his own community.
+
+And now, in Chapter 119, the man who thinks he's Prometheus stands on the back of the man who actually comes from fire. Ahab invokes "as Persian once did worship" while using the Parsee as a footstool. He speaks the words of Frashad's religion while crushing Frashad beneath his foot. He claims the fire while standing on the man the fire belonged to.
+
+**Prometheus gave fire to humanity and was chained to a rock. Ahab took fire from Frashad's religion and stood on him.** The myth is inverted. The American captain doesn't steal fire from the gods — he steals it from the immigrant standing beneath him. He doesn't give it to anyone — he shouts it at the sky. And the vulture that eats his liver is not divine punishment. It's his own obsession, consuming him from the inside, every day, growing back every night so it can consume him again.
+
+Frashad, beneath Ahab's foot, knows what the fire actually is. It is not a weapon. It is not a dramatic prop for shouting at storms. It is Asha made visible. It is truth burning in the darkness. It is the thing his father taught him to tend — carefully, quietly, with clean hands and a covered head — before everything was taken away.
+
+The man above him screams at the fire. The man beneath him remembers tending it.
+
+### The Ivory Leg — Walking on God's Bone
+
+Ahab's leg is made of whale ivory. The leg he lost to Moby Dick was replaced with a bone from a sperm whale — the same species that took his leg. He walks on a piece of the thing that tried to kill him.
+
+**What Ahab thinks this means:** Dominion. Victory. You took my leg, I took yours. I walk on your bone. A part of God is under my foot with every step. The ivory leg is a trophy, a declaration that he survived, that he took something back, that the whale broke him but he made the whale carry him. Every thump on the Pequod's deck is Ahab saying: I am above you.
+
+**The full picture of Chapter 119:** Ahab stands on Fedallah with one foot. His other foot is the ivory leg — whale bone. So:
+
+- **Below his left foot:** God's prophet — the Parsee, the instrument of Asha
+- **Below his right foot:** God's body — the whale's bone, a piece of the creature that embodies kala, cosmic force
+- **Above him:** The fire — St. Elmo's fire on the masts, which he addresses as a Zoroastrian would address sacred flame
+
+Ahab is standing on the divine (bone and prophet) while shouting at the divine (fire). He is using God as a platform to scream at God. The whale beneath him, the Parsee beneath him, the fire above him — and Ahab in the middle, roaring.
+
+He thinks this is the posture of defiance. It is actually the posture of a man completely surrounded by forces he does not understand, standing on them, screaming at them, mistaking proximity for conquest.
+
+**What Frashad sees — the Zoroastrian reading:**
+
+The ivory leg is **nasu.** Corpse matter. In Zoroastrian purity law, dead matter from an animal — bone, hair, teeth, hide — is ritually polluting. Contact with nasu requires elaborate purification. A corpse-bearer (nasā-sālār) who handles the dead must undergo extensive cleansing rituals before reentering the community.
+
+Ahab has made nasu into his body. He didn't just touch corpse matter — he *attached it to himself.* He walks on death. His foundation is built on the most impure substance in Zoroastrian theology. Every step is contamination. Every thump on the deck is a man advertising that he is held up by death and doesn't know it.
+
+A Mobed's son would see this instantly. Ahab is not claiming dominion over God. He is wearing his own pollution. He is carrying death in his body — literally, structurally, the dead bone of a whale fused to his living flesh — and calling it strength.
+
+**And the deeper layer:** Ahab should have died when Moby Dick took his leg. He lived. He cheated the transition — the Chinvat Bridge, the soul's crossing. And now he walks on the bone of the thing that should have killed him, and he calls it victory, and every step is actually the cosmic order's evidence against him. The ivory leg is not a trophy. It is a record of an unpaid debt. The nasu he walks on is the receipt.
+
+Frashad, beneath Ahab's living foot, looks at Ahab's dead foot and knows: this man is already dead. He just hasn't stopped walking yet.
 
 ---
 
